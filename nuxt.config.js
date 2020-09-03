@@ -25,7 +25,7 @@ const nuxtConfig = {
   buildModules: modules,
   head,
   css,
-  plugins: [],
+  plugins: ['~/plugins/font-awesome.js'],
   watch: ['./tailwind.config.js'],
   build: {},
 }
