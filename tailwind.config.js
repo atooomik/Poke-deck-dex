@@ -7,8 +7,13 @@
 module.exports = {
   theme: {
     colors: {
-      semiGray: 'rgba(226,232,240,0.5)',
+      ui: {
+        negative: '#333333',
+        noir: '#242526',
+        semiGray: 'rgba(226,232,240,0.5)',
+      },
     },
+    backgroundColor: (theme) => theme('colors'),
   },
   variants: {},
   plugins: [],
