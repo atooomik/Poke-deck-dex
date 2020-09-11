@@ -1,0 +1,116 @@
+//Animación para la bienvenida
+
+@keyframes entranceOne {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.welcome {
+  opacity: 0;
+  animation: entranceOne 2s forwards;
+}
+
+@keyframes entranceTwo {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+}
+//Animación para el primer texto de las instrucciones
+.steps-one {
+  opacity: 0;
+  animation: entranceTwo 5s forwards;
+  animation-delay: 1.5s;
+}
+
+@keyframes entranceThree {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(-75%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-200%);
+  }
+}
+//Animación para el segundo texto de las instrucciones
+.steps-two {
+  opacity: 0;
+  animation: entranceThree 5s forwards;
+  animation-delay: 4.5s;
+}
+
+.fade-leave-active {
+  animation: fadeOut 1s;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+//Animación para el el boton de confirmación de las instrucciones
+@keyframes delayEnter {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.delay-enter {
+  animation: delayEnter 3s forwards;
+}
+
+//Animación para la entrada del pokeboard
+.entrance-enter-active {
+  animation: transitionToUp 2.5s;
+}
+
+@keyframes transitionToUp {
+  0% {
+    opacity: 0;
+    transform: translateY(200%);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -6,16 +6,24 @@
       </button>
       <div :class="`detail-card bg-types-${mainType}`">
         <div v-if="pokemon">
-          <img
-            class="detail-card__sprite"
-            :src="imageUrl + pokemon.id + '.png'"
-            width="96"
-            height="96"
-            :alt="(pokemon.name + ' sprite')"
-          />
-          <div>
-            <p>{{pokemon.name}}</p>
+          <div class="detail-card__main-info">
+            <div class="detail-card__sprite">
+              <img :src="sprite" width="96" height="96" :alt="(pokemon.name + ' sprite')" />
+            </div>
+            <p class="detail-card__id">{{pokemon.id}}</p>
+            <p class="detail-card__name">{{pokemon.name}}</p>
+            <p
+              v-for="(value, index) in pokemon.types"
+              :key="'value'+index"
+              class="detail-card__types"
+            >{{value.type.name}}</p>
+            <p
+              v-for="(value, index) in pokemon.abilities"
+              :key="'value'+index"
+              class="detail-card__ability"
+            >{{value.ability.name}}</p>
           </div>
+
           <div>
             <p>{{'alola'}}</p>
           </div>
@@ -46,6 +54,7 @@ export default {
       show: false,
       pokemon: {},
       mainType: '',
+      sprite: '',
     }
   },
   methods: {
@@ -57,6 +66,7 @@ export default {
         .then((data) => {
           this.pokemon = data
           this.mainType = data.types[0].type.name
+          this.sprite = data.sprites['front_default']
           this.show = true
         })
         .catch((error) => {

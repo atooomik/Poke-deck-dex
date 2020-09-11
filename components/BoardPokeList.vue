@@ -1,12 +1,18 @@
 <template>
-  <div class="card grid grid-cols-2 lg:grid-cols-8 gap-4 text-center">
+  <div class="h-80 overflow-y-scroll card grid grid-cols-3 lg:grid-cols-4 gap-4 text-center">
     <div
-      class="bg-ui-noir rounded-lg"
+      class="w-full bg-ui-noir rounded-lg"
       v-for="(poke,index) in pokemons"
       :key="index"
       @click="setPokemonUrl(poke.url)"
     >
-      <img :src="imageUrl + poke.id + '.png'" width="96" height="96" :alt="(poke.name + ' sprite')" />
+      <img
+        class="mx-auto"
+        :src="imageUrl + poke.id + '.png'"
+        width="48"
+        height="48"
+        :alt="(poke.name + ' sprite')"
+      />
       {{poke.name}}
     </div>
 
