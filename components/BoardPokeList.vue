@@ -16,12 +16,14 @@
       {{poke.name}}
     </div>
 
-    <detail-card
-      v-if="showDetail"
-      :pokemonUrl="pokemonUrl"
-      :imageUrl="imageUrl"
-      @closeDetail="closeDetail"
-    />
+    <transition name="bounce">
+      <detail-card
+        v-if="showDetail"
+        :pokemonUrl="pokemonUrl"
+        :imageUrl="imageUrl"
+        @closeDetail="closeDetail"
+      />
+    </transition>
 
     <div id="scroll-trigger" ref="infinitescrolltrigger">
       <fa-icon class="fa-spin" :icon="['fad', 'spinner',]" />
