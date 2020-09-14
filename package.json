@@ -15,19 +15,19 @@
     "@fortawesome/pro-duotone-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^2.0.0",
     "node-sass": "^4.14.1",
-    "nuxt": "^2.14.0"
+    "nuxt": "^2.14.5"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^2.1.0",
+    "@nuxtjs/tailwindcss": "^3.0.2",
     "prettier": "2.1.1",
     "sass": "^1.26.10",
-    "sass-loader": "^10.0.1",
-    "stylelint": "13.6.1",
-    "stylelint-config-sass-guidelines": "7.0.0",
+    "sass-loader": "^10.0.2",
+    "stylelint": "13.7.1",
+    "stylelint-config-sass-guidelines": "7.1.0",
     "stylelint-no-unsupported-browser-features": "4.0.0",
     "stylelint-order": "4.1.0",
     "stylelint-prettier": "1.1.2",
-    "stylelint-scss": "3.17.2",
+    "stylelint-scss": "3.18.0",
     "webpack": "^4.44.1"
   }
 }
