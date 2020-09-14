@@ -21,7 +21,6 @@ let css = [
 let modules = ['@nuxtjs/tailwindcss']
 
 const nuxtConfig = {
-  mode: 'universal',
   buildModules: modules,
   head,
   css,

@@ -13,6 +13,7 @@
 }
 
 .detail-card {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +23,6 @@
   margin-right: auto;
   margin-left: auto;
   flex-direction: column;
-  background-color: #fff;
   border-radius: 5px;
 
   &__main-info {
@@ -32,12 +32,13 @@
 
   &__sprite {
     width: 25%;
-    height: 7rem;
+    height: 100%;
     margin-right: auto;
     margin-left: auto;
     justify-content: center;
     align-items: center;
     background-color: #fff;
+    border-radius: theme("borderRadius.lg");
   }
 
   &__data {
