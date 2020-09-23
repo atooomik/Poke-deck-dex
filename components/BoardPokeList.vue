@@ -13,20 +13,18 @@
         height="48"
         :alt="(poke.name + ' sprite')"
       />
-      {{poke.name}}
+      <p v-text="poke.name" class="text-ui-semiGray"></p>
     </div>
 
-    <transition name="bounce">
-      <detail-card
-        v-if="showDetail"
-        :pokemonUrl="pokemonUrl"
-        :imageUrl="imageUrl"
-        @closeDetail="closeDetail"
-      />
-    </transition>
+    <detail-card
+      v-if="(modalStatus === 'pokemon its defined')"
+      :pokemonUrl="pokemonUrl"
+      :imageUrl="imageUrl"
+      @closeDetail="closeDetail"
+    />
 
     <div id="scroll-trigger" ref="infinitescrolltrigger">
-      <fa-icon class="fa-spin" :icon="['fad', 'spinner',]" />
+      <img class="await-data" src="../assets/images/pokeball.svg" alt="pokebola de espera" />
     </div>
   </div>
 </template>
@@ -45,7 +43,7 @@ export default {
       nextUrl: '',
       currentUrl: '',
       pokemonUrl: '',
-      showDetail: false,
+      modalStatus: '',
     }
   },
   components: {
@@ -81,7 +79,6 @@ export default {
           }
         })
       })
-
       observer.observe(this.$refs.infinitescrolltrigger)
     },
     next() {
@@ -89,13 +86,15 @@ export default {
       this.fetchData()
     },
     setPokemonUrl(url) {
+      this.modalStatus = 'not defined'
+      console.log(this.modalStatus, this.pokemonUrl)
       this.pokemonUrl = url
-      this.showDetail = true
-      console.log(this.showDetail, this.pokemonUrl)
+      this.modalStatus = 'pokemon its defined'
+      console.log(this.modalStatus, this.pokemonUrl)
     },
     closeDetail() {
       this.pokemonUrl = ''
-      this.showDetail = false
+      this.modalStatus = 'not defined'
     },
   },
   created() {

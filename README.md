@@ -17,4 +17,8 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+# Development progress records
+
+-23/09/20: Added an state to track the exact moment when the fetch request its
+complete and then, display de modal with full data, preventing the launch of an
+empty modal and given better experience.

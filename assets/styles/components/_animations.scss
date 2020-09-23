@@ -119,13 +119,25 @@
   }
 }
 
+//Animación para la pokebola de espera
+
+@keyframes rotatingPokeball {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 // Animación para el modal de los detalles de pokemon
 
-.bounce-enter-active {
+.slowly-opacity-enter-active {
   animation: bounce-in 1s;
 }
 
-.bounce-leave-active {
+.slowly-opacity-leave-active {
   animation: bounce-out 1s;
 }
 

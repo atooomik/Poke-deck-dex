@@ -12,6 +12,12 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.await-data {
+  width: 4rem;
+  height: 4rem;
+  animation: rotatingPokeball 1s infinite;
+}
+
 .detail-card {
   position: relative;
   display: flex;
