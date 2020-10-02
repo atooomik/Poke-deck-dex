@@ -1,8 +1,10 @@
 <template>
-  <div class="h-80 overflow-y-scroll card grid grid-cols-3 lg:grid-cols-4 gap-4 text-center">
+  <div
+    class="h-80 overflow-y-scroll card grid grid-cols-3 lg:grid-cols-4 gap-4 text-center"
+  >
     <div
       class="w-full bg-ui-noir rounded-lg"
-      v-for="(poke,index) in pokemons"
+      v-for="(poke, index) in pokemons"
       :key="index"
       @click="setPokemonUrl(poke.url)"
     >
@@ -11,27 +13,22 @@
         :src="imageUrl + poke.id + '.png'"
         width="48"
         height="48"
-        :alt="(poke.name + ' sprite')"
+        :alt="poke.name + ' sprite'"
       />
       <p v-text="poke.name" class="text-ui-semiGray"></p>
     </div>
 
-    <detail-card
-      v-if="(modalStatus === 'pokemon its defined')"
-      :pokemonUrl="pokemonUrl"
-      :imageUrl="imageUrl"
-      @closeDetail="closeDetail"
-    />
-
     <div id="scroll-trigger" ref="infinitescrolltrigger">
-      <img class="await-data" src="../assets/images/pokeball.svg" alt="pokebola de espera" />
+      <img
+        class="await-data"
+        src="../assets/images/pokeball.svg"
+        alt="pokebola de espera"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import DetailCard from './DetailCard.vue'
-
 export default {
   name: 'BoardPokeList',
   data: () => {
@@ -43,11 +40,7 @@ export default {
       nextUrl: '',
       currentUrl: '',
       pokemonUrl: '',
-      modalStatus: '',
     }
-  },
-  components: {
-    DetailCard,
   },
   methods: {
     fetchData() {
@@ -89,12 +82,10 @@ export default {
       this.modalStatus = 'not defined'
       console.log(this.modalStatus, this.pokemonUrl)
       this.pokemonUrl = url
-      this.modalStatus = 'pokemon its defined'
+      this.modalStatus = 'is defined'
+      this.$emit('reciveData', this.pokemonUrl)
+      this.$emit('reciveModal', this.modalStatus)
       console.log(this.modalStatus, this.pokemonUrl)
-    },
-    closeDetail() {
-      this.pokemonUrl = ''
-      this.modalStatus = 'not defined'
     },
   },
   created() {
