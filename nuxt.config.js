@@ -10,6 +10,7 @@ const head = {
     },
   ],
   link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  titleTemplate: "Poke Deck'x",
 }
 
 let css = [

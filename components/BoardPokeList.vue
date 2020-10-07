@@ -15,7 +15,7 @@
         height="48"
         :alt="poke.name + ' sprite'"
       />
-      <p v-text="poke.name" class="text-ui-semiGray"></p>
+      <p v-text="poke.name" class="pokemon-name"></p>
     </div>
 
     <div id="scroll-trigger" ref="infinitescrolltrigger">
@@ -101,5 +101,10 @@ export default {
 <style lang="scss" scoped>
 .card {
   justify-items: center;
+}
+
+.pokemon-name {
+  color: theme('colors.ui.semiGray');
+  text-transform: capitalize;
 }
 </style>

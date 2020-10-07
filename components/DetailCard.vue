@@ -27,7 +27,7 @@
           </div>
           <div class="detail-card__data">
             <p class="col-span-1">{{ pokemon.id }}</p>
-            <p class="col-span-1">{{ pokemon.name }}</p>
+            <p class="col-span-1">{{ pokemonName }}</p>
             <div class="grid grid-cols-2 col-span-2">
               <img
                 v-for="(value, index) in pokemon.types"
@@ -72,13 +72,12 @@ export default {
     return {
       pokemon: {},
       mainType: '',
+      pokemonName: '',
       sprite: '',
       fetchHasFinish: 'idle',
     }
   },
-  watch() {
-    
-  },
+  watch() {},
 
   methods: {
     fetchData() {
@@ -89,6 +88,7 @@ export default {
         })
         .then((data) => {
           this.pokemon = data
+          this.pokemonName = this.capitalizeName(data.name)
           this.mainType = data.types[0].type.name
           this.sprite = data.sprites['front_default']
           console.log(this.fetchHasFinish + 'realizando fetch')
@@ -100,6 +100,9 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    capitalizeName(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1)
     },
     closeDetail() {
       this.fetchHasFinish = 'idle'
