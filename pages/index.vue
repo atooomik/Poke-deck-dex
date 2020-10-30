@@ -61,21 +61,17 @@
         v-if="deviceScreen === 'is mobile' && modalStatus === 'is defined'"
         class="overlay"
       >
-        <div
-          v-if="fetchStatus === 'idle'"
-          class="relative w-full flex justify-center items-center"
-        >
+        <div v-if="fetchStatus === 'has finish'" class="w-full">
+          <detail-card
+            :pokemonSelected="pokemonFetched"
+            @closeDetail="closeDetail"
+          />
+        </div>
+        <div v-else class="relative w-full flex justify-center items-center">
           <img
             class="await-data"
             src="../assets/images/pokeball.svg"
             alt="pokebola de espera"
-          />
-        </div>
-        <div v-else class="w-full">
-          <detail-card
-            v-if="modalStatus === 'is defined'"
-            :pokemonSelected="pokemonFetched"
-            @closeDetail="closeDetail"
           />
         </div>
       </div>
@@ -83,21 +79,18 @@
         v-else-if="deviceScreen === 'is desktop' && userReady === 'is ready'"
         class="w-1/2 p-4"
       >
-        <div
-          v-if="fetchStatus === 'idle'"
-          class="relative w-full flex justify-center items-center"
-        >
-          <img
-            class="await-data"
-            src="../assets/images/pokeball.svg"
-            alt="pokebola de espera"
-          />
-        </div>
-        <div v-else class="w-full">
+        <div v-if="fetchStatus === 'has finish'" class="w-full">
           <detail-card
             v-if="modalStatus === 'is defined'"
             :pokemonSelected="pokemonFetched"
             @closeDetail="closeDetail"
+          />
+        </div>
+        <div v-else class="relative w-full flex justify-center items-center">
+          <img
+            class="await-data"
+            src="../assets/images/pokeball.svg"
+            alt="pokebola de espera"
           />
         </div>
       </div>
@@ -120,9 +113,8 @@ export default {
       deviceScreen: 'idle',
       userReady: 'idle',
       instructionsState: 'idle',
-      pokemonSelected: 'idle',
       modalStatus: '',
-      fetchStatus: null,
+      fetchStatus: 'idle',
       pokemonFetched: {},
     }
   },
@@ -133,18 +125,17 @@ export default {
   methods: {
     //Start request para el detalle de la modal
     pokeFetch(pokemonUrl) {
+      this.modalStatus = 'is defined'
+      this.fetchStatus = 'is searching'
       fetch(pokemonUrl)
         .then((response) => {
           if (response.status === 200) return response.json()
         })
         .then((data) => {
-          this.modalStatus = 'is defined'
-          this.fetchStatus = 'idle'
           this.pokemonFetched = data
         })
         .then(() => {
           this.fetchStatus = 'has finish'
-          this.pokemonSelected = 'has selection'
         })
         .catch((error) => {
           console.log(error)
@@ -166,7 +157,6 @@ export default {
     },
 
     closeDetail() {
-      this.pokemonSelected = 'idle'
       this.modalStatus = 'not defined'
     },
   },
