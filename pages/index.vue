@@ -14,7 +14,7 @@
             Bienvenido a la pokedex de Kanto
           </p>
         </div>
-
+        <!--Instrucciones-->
         <transition name="fade">
           <div v-if="instructionsState === 'idle'" class="relative">
             <div class="h-32 overflow-hidden">
@@ -42,6 +42,7 @@
             </button>
           </div>
         </transition>
+        <!--Instrucciones-->
         <transition name="entrance">
           <div v-if="userReady === 'is ready'">
             <div
@@ -55,14 +56,47 @@
           </div>
         </transition>
       </div>
+      <!--Busqueda-->
       <div
-        v-if="deviceScreen === 'is desktop' && userReady === 'is ready'"
-        class="w-1/2 my-10 bg-types-dragon"
+        v-if="deviceScreen === 'is mobile' && modalStatus === 'is defined'"
+        class="overlay"
       >
-        <div v-if="pokemonSelected === 'idle'">Esperando selección</div>
-        <div v-else>
+        <div
+          v-if="fetchStatus === 'idle'"
+          class="relative w-full flex justify-center items-center"
+        >
+          <img
+            class="await-data"
+            src="../assets/images/pokeball.svg"
+            alt="pokebola de espera"
+          />
+        </div>
+        <div v-else class="w-full">
           <detail-card
-            :pokemonUrl="pokemonSelected"
+            v-if="modalStatus === 'is defined'"
+            :pokemonSelected="pokemonFetched"
+            @closeDetail="closeDetail"
+          />
+        </div>
+      </div>
+      <div
+        v-else-if="deviceScreen === 'is desktop' && userReady === 'is ready'"
+        class="w-1/2 p-4"
+      >
+        <div
+          v-if="fetchStatus === 'idle'"
+          class="relative w-full flex justify-center items-center"
+        >
+          <img
+            class="await-data"
+            src="../assets/images/pokeball.svg"
+            alt="pokebola de espera"
+          />
+        </div>
+        <div v-else class="w-full">
+          <detail-card
+            v-if="modalStatus === 'is defined'"
+            :pokemonSelected="pokemonFetched"
             @closeDetail="closeDetail"
           />
         </div>
@@ -71,23 +105,9 @@
 
     <transition name="entrance">
       <div v-if="userReady === 'is ready'">
-        <board-poke-list
-          @reciveData="processProps"
-          @reciveModal="processModal"
-        />
+        <board-poke-list @reciveData="pokeFetch" />
       </div>
     </transition>
-
-    <div
-      v-if="deviceScreen === 'is mobile' && modalStatus === 'is defined'"
-      class="overlay"
-    >
-      <detail-card
-        v-if="modalStatus === 'is defined'"
-        :pokemonUrl="pokemonSelected"
-        @closeDetail="closeDetail"
-      />
-    </div>
   </div>
 </template>
 
@@ -102,6 +122,8 @@ export default {
       instructionsState: 'idle',
       pokemonSelected: 'idle',
       modalStatus: '',
+      fetchStatus: null,
+      pokemonFetched: {},
     }
   },
   components: {
@@ -109,6 +131,26 @@ export default {
     DetailCard,
   },
   methods: {
+    //Start request para el detalle de la modal
+    pokeFetch(pokemonUrl) {
+      fetch(pokemonUrl)
+        .then((response) => {
+          if (response.status === 200) return response.json()
+        })
+        .then((data) => {
+          this.modalStatus = 'is defined'
+          this.fetchStatus = 'idle'
+          this.pokemonFetched = data
+        })
+        .then(() => {
+          this.fetchStatus = 'has finish'
+          this.pokemonSelected = 'has selection'
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    //End request para el detalle de la modal
     mobileScreen() {
       if (window.innerWidth < 1024) {
         this.deviceScreen = 'is mobile'
@@ -122,14 +164,7 @@ export default {
       this.userReady = 'is ready'
       console.log(this.instructionsState)
     },
-    processProps(pokemonUrl) {
-      this.pokemonSelected = pokemonUrl
-      console.log(this.pokemonSelected + ' Se esta enviando')
-    },
-    processModal(modalStatus) {
-      this.modalStatus = modalStatus
-      console.log(modalStatus + 'se esta recibiendo el estatus de la modal')
-    },
+
     closeDetail() {
       this.pokemonSelected = 'idle'
       this.modalStatus = 'not defined'
@@ -147,4 +182,3 @@ export default {
   transition: all 1s ease-in-out;
 }
 </style>
-

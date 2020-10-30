@@ -79,13 +79,8 @@ export default {
       this.fetchData()
     },
     setPokemonUrl(url) {
-      this.modalStatus = 'not defined'
-      console.log(this.modalStatus, this.pokemonUrl)
       this.pokemonUrl = url
-      this.modalStatus = 'is defined'
       this.$emit('reciveData', this.pokemonUrl)
-      this.$emit('reciveModal', this.modalStatus)
-      console.log(this.modalStatus, this.pokemonUrl)
     },
   },
   created() {
