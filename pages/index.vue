@@ -81,14 +81,18 @@
       >
         <div v-if="fetchStatus === 'has finish'" class="w-full">
           <detail-card
-            v-if="modalStatus === 'is defined'"
             :pokemonSelected="pokemonFetched"
             @closeDetail="closeDetail"
           />
         </div>
-        <div v-else class="relative w-full flex justify-center items-center">
+        <div
+          v-else
+          class="relative w-full flex flex-col justify-center items-center"
+        >
+          <p class="mb-4">Haz click en el sprite de un Pokemon para comenzar</p>
           <img
-            class="await-data"
+            class="w-10 h-10"
+            :class="{ 'await-data': indicator === 'is searching' }"
             src="../assets/images/pokeball.svg"
             alt="pokebola de espera"
           />
@@ -115,6 +119,7 @@ export default {
       instructionsState: 'idle',
       modalStatus: '',
       fetchStatus: 'idle',
+      indicator: 'idle',
       pokemonFetched: {},
     }
   },
@@ -158,6 +163,8 @@ export default {
 
     closeDetail() {
       this.modalStatus = 'not defined'
+      this.fetchStatus = 'idle'
+      this.indicator = 'idle'
     },
   },
   mounted() {
