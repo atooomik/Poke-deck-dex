@@ -1,7 +1,6 @@
 <template>
   <div class="max-w-xl w-full h-full mx-auto p-4 lg:max-w-5xl">
-    <div class="lg:flex">
-      <div class="w-full lg:w-1/2">
+      <div class="w-full">
         <div
           id="welcome"
           class="welcome my-20 p-4 rounded-lg bg-ui-noir lg:max-w-sm lg:mx-auto"
@@ -11,7 +10,7 @@
           }"
         >
           <p class="text-center text-ui-white">
-            Bienvenido a la pokedex de Kanto
+            Bienvenido a la pokedex Nacional
           </p>
         </div>
         <!--Instrucciones-->
@@ -42,23 +41,11 @@
             </button>
           </div>
         </transition>
-        <!--Instrucciones-->
-        <transition name="entrance">
-          <div v-if="userReady === 'is ready'">
-            <div
-              class="flex flex-col items-center my-10 p-4 rounded-lg bg-ui-noir lg:max-w-sm lg:mx-auto"
-            >
-              <p class="text-center text-ui-white">
-                ¿Qué Pokémon quieres consultar el dia de hoy?
-              </p>
-              <input class="my-4 mx-auto rounded-lg" type="text" />
-            </div>
-          </div>
-        </transition>
+        <!--Instrucciones-->        
       </div>
       <!--Busqueda-->
       <div
-        v-if="deviceScreen === 'is mobile' && modalStatus === 'is defined'"
+        v-if=" modalStatus === 'is defined'"
         class="overlay"
       >
         <div v-if="fetchStatus === 'has finish'" class="w-full">
@@ -74,32 +61,7 @@
             alt="pokebola de espera"
           />
         </div>
-      </div>
-      <div
-        v-else-if="deviceScreen === 'is desktop' && userReady === 'is ready'"
-        class="w-1/2 p-4"
-      >
-        <div v-if="fetchStatus === 'has finish'" class="w-full">
-          <detail-card
-            :pokemonSelected="pokemonFetched"
-            @closeDetail="closeDetail"
-          />
-        </div>
-        <div
-          v-else
-          class="relative w-full flex flex-col justify-center items-center"
-        >
-          <p class="mb-4">Haz click en el sprite de un Pokemon para comenzar</p>
-          <img
-            class="w-10 h-10"
-            :class="{ 'await-data': indicator === 'is searching' }"
-            src="../assets/images/pokeball.svg"
-            alt="pokebola de espera"
-          />
-        </div>
-      </div>
-    </div>
-
+      </div>      
     <transition name="entrance">
       <div v-if="userReady === 'is ready'">
         <board-poke-list @reciveData="pokeFetch" />
@@ -132,7 +94,9 @@ export default {
     pokeFetch(pokemonUrl) {
       this.modalStatus = 'is defined'
       this.fetchStatus = 'is searching'
-      fetch(pokemonUrl)
+      const pokemonToFetch = `https://pokeapi.co/api/v2/pokemon/${pokemonUrl}`
+      console.log(pokemonToFetch)
+      fetch(pokemonToFetch)
         .then((response) => {
           if (response.status === 200) return response.json()
         })

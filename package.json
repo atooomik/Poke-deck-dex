@@ -13,19 +13,18 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^2.0.0",
     "node-sass": "^4.14.1",
-    "nuxt": "^2.14.5"
+    "nuxt": "^2.15.2"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^3.0.2",
+    "@nuxtjs/tailwindcss": "^3.4.2",
+    "@nuxtjs/eslint-config": "^5.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "eslint": "^7.16.0",
+    "eslint-plugin-nuxt": "^2.0.0",
     "prettier": "2.1.1",
+    "babel-eslint": "^10.1.0",
     "sass": "^1.26.10",
     "sass-loader": "^10.0.2",
-    "stylelint": "13.7.1",
-    "stylelint-config-sass-guidelines": "7.1.0",
-    "stylelint-no-unsupported-browser-features": "4.0.0",
-    "stylelint-order": "4.1.0",
-    "stylelint-prettier": "1.1.2",
-    "stylelint-scss": "3.18.0",
     "webpack": "^4.44.1"
   }
 }

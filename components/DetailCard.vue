@@ -11,7 +11,10 @@
         </div>
 
         <div class="detail-card__data">
-          <p class="col-span-1">{{ pokemonSelected.id }}</p>
+          <div class="flex">
+            <p class="mr-2">Entrada en la pokedex nacional:</p>
+            <p class="col-span-1">{{ pokemonSelected.id }}</p>
+          </div>
           <p class="col-span-1">{{ pokemonSelected.name }}</p>
           <div class="grid grid-cols-2 col-span-2">
             <img
